@@ -14,4 +14,9 @@ class Post extends Model
 
     // arti dari guarded yaitu hanya id aja yg tidak di perbolehkan di isi
     protected $guarded = ['id'];
+
+    public function Category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

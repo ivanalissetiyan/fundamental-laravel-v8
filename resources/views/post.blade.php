@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
-    
+
 
     <h1 class="mb-5">{{ $post->title }}</h1>
 
@@ -9,5 +9,5 @@
 
     {!! $post->body !!}
 
-    <a href="/posts">Bact To Post</a>
+    <a class="d-block mt-3" href="/posts">Bact To Post</a>
 @endsection

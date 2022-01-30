@@ -21,12 +21,36 @@
                           href="/categories">Categories</a>
                   </li>
               </ul>
+
               <ul class="navbar-nav ms-auto">
-                  <li class="nav-item">
-                      <a class="nav-link {{ $active === 'login' ? 'active' : '' }}" href="/login"><i
-                              class="bi bi-arrow-right-square"></i> Login</a>
-                  </li>
+                  @auth
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                              data-bs-toggle="dropdown" aria-expanded="false">
+                              Welcome Back, {{ auth()->user()->name }}
+                          </a>
+                          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <li><a class="dropdown-item" href="/dashboard">My Dashboard</a></li>
+                              <li>
+                                  <hr class="dropdown-divider">
+                              </li>
+                              <li>
+                                  <form action="/logout" method="post">
+                                      @csrf
+                                      <button type="submit" class="dropdown-item">Logout</button>
+                                  </form>
+                              </li>
+                          </ul>
+                      </li>
+                  @else
+                      <li class="nav-item">
+                          <a class="nav-link {{ $active === 'login' ? 'active' : '' }}" href="/login"><i
+                                  class="bi bi-arrow-right-square"></i> Login</a>
+                      </li>
+                  @endauth
               </ul>
+
+
           </div>
       </div>
   </nav>

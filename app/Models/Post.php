@@ -16,6 +16,8 @@ class Post extends Model
     protected $guarded = ['id'];
     protected $with = ['category', 'author'];
 
+
+    // Searching
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? false, function ($query, $search) {
@@ -50,5 +52,10 @@ class Post extends Model
     public function Author()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

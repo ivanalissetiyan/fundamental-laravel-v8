@@ -6,7 +6,8 @@
     </div>
 
     <div class="col-lg-8">
-        <form method="post" action="/dashboard/posts/{{ $post->slug }}" class="mb-5">
+        <form method="post" action="/dashboard/posts/{{ $post->slug }}" class="mb-5"
+            enctype="multipart/form-data">
             @method('put')
             @csrf
             <div class="mb-3">
@@ -37,6 +38,27 @@
                     @endforeach
                 </select>
             </div>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Post Image</label>
+
+                @if ($post->image)
+                    <img src="{{ asset('storage/' . $post->image) }}" class="img-fluid mb-6 col-sm-5 d-block"
+                        id="img-preview">
+                @else
+                    <img class="img-fluid mb-6 col-sm-5" id="img-preview">
+                @endif
+
+                <input class="form-control mb-3 @error('image') is-invalid @enderror" type="file" id="image" name="image"
+                    onchange="document.getElementById('img-preview').src = window.URL.createObjectURL(this.files[0])">
+
+                @error('image')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
             <div class="mb-3">
                 <label for="body" class="form-label">Body</label>
                 @error('body')
